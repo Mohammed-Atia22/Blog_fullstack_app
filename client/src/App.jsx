@@ -20,7 +20,6 @@ function App() {
     image: "",
   });
 
-  // FIX 1: confirmPassword added to registerData
   const [registerData, setRegisterData] = useState({
     name: "",
     email: "",
@@ -28,7 +27,6 @@ function App() {
     confirmPassword: "",
   });
 
-  // FIX 2: loginData and its handlers are uncommented and working
   const [loginData, setLoginData] = useState({
     email: "",
     password: "",
@@ -43,7 +41,6 @@ function App() {
     fetchPosts();
   }, []);
 
-  // FIX 3: handleRegister now logs the actual error, not registerData
   const handleRegister = (e) => {
     e.preventDefault();
     axios.post("http://localhost:5000/api/auth/signup", registerData)
@@ -54,12 +51,10 @@ function App() {
         localStorage.setItem("name", res.data.user.name);
       })
       .catch(err => {
-        // FIX: was logging registerData instead of the actual error
         console.error("Register error:", err.response?.data?.message || err.message);
       });
   };
 
-  // FIX 4: changeRegister simplified — all branches did the exact same thing
   const [registerErrors, setRegisterErrors] = useState({name: "",email: "",password: "",confirmPassword: ""});
   const changeRegister = (e) => {
     const { name, value } = e.target;
@@ -75,7 +70,6 @@ function App() {
     }
   };
 
-  // FIX 5: login handlers are now implemented
   const handleLogin = (e) => {
     e.preventDefault();
     axios.post("http://localhost:5000/api/auth/login", loginData)
@@ -121,10 +115,8 @@ function App() {
     axios.post(`http://localhost:5000/api/data/posts`,post,{headers: {Authorization: `Bearer ${token}`}})
     .then(res => setContent(prev => [...prev, res.data.post]))
     .catch(error => console.log(error));
-    // console.log("Add post:", post);
   };
 
-  // FIX 4: changeRegister simplified — all branches did the exact same thing
   const [addPostErrors, setAddPostErrors] = useState({title: "", description: "", image: ""});
   const changeAddPost = (e) => {
     const { name, value } = e.target;

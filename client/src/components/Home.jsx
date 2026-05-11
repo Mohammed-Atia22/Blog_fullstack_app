@@ -16,8 +16,6 @@ export default function Home(props) {
 
   return (
     <div className="min-h-screen bg-gray-50">
-
-      {/* Navbar */}
       <nav className="bg-white border-b border-gray-200 px-6 py-4 flex items-center justify-between">
         <span className="text-xl font-bold text-blue-600 tracking-tight">MyBlog</span>
         <div>
@@ -41,16 +39,12 @@ export default function Home(props) {
           )}
         </div>
       </nav>
-
-      {/* Posts Grid */}
       <main className="max-w-4xl mx-auto px-6 py-8">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {visiblePosts.map((post, index) => (
             <Post token={props.token} key={index} name={props.name} data={post} handlers={{ handleDeletePost }} />
           ))}
         </div>
-
-        {/* Pagination */}
         {totalPages > 1 && (
           <div className="flex justify-center items-center gap-2 mt-8">
             <button
@@ -83,8 +77,6 @@ export default function Home(props) {
           </div>
         )}
       </main>
-
-      {/* Add Post FAB */}
       {localStorage.getItem("token")&&<button
         onClick={() => navigate('/addPost')}
         className="fixed bottom-6 right-6 px-5 py-3 bg-blue-600 text-white text-sm font-medium rounded-xl shadow-lg hover:bg-blue-700 transition-colors cursor-pointer"
